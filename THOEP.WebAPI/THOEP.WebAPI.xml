@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>THOEP.WebAPI</name>
+    </assembly>
+    <members>
+        <member name="M:THOEP.WebAPI.Controllers.AccountController.Post(THOEP.WebAPI.ViewModels.RegistrationViewModel)">
+            <summary>
+            User Registration.
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.AuthController.Post(THOEP.WebAPI.ViewModels.CredentialsViewModel)">
+            <summary>
+            User login.
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.AuthController.Admin(THOEP.WebAPI.ViewModels.CredentialsViewModel)">
+            <summary>
+            Login for admin.
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.DashboardController.Home">
+            <summary>
+            User dashboard.
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.DashboardController.HomeAdmin">
+            <summary>
+            Admin dashboard.
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.DiseaseController.GetDiseases(System.Int32)">
+            <summary>
+            Get diseases by healthInfoId.
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.DiseaseController.GetDiseasesById(System.Int32)">
+            <summary>
+            Get diseases by Id.
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.DiseaseController.AddDisease(THOEP.Services.DTO.DiseaseDto)">
+            <summary>
+            Add new disease.
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.DiseaseController.EditDisease(THOEP.Services.DTO.DiseaseDto)">
+            <summary>
+            Edit disease.
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.DiseaseController.DeleteDisease(System.Int32)">
+            <summary>
+            Delete disease by Id.
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.HealthInfoController.GetHealthInfosEncoded(System.Int32)">
+            <summary>
+            Get health infos.
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.HealthInfoController.GetHealthInfoByIdEncoded(System.Int32)">
+            <summary>
+            Get health info by id.
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.HealthInfoController.AddHealthInfo(THOEP.Services.DTO.HealthInfoDto)">
+            <summary>
+            Add health info.
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.HealthInfoController.EditHealthInfo(THOEP.Services.DTO.HealthInfoDto)">
+            <summary>
+            Update health info.
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.HealthInfoController.DeleteHealthInfo(System.Int32)">
+            <summary>
+            Delete health info.
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.HealthInfoController.GetAverageHealthMetrics(System.Int32)">
+            <summary>
+            Get average for health metrics.
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.ManageController.GetUserById(System.String)">
+            <summary>
+            Get user by id ̣(for admin).
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.ManageController.GetAllUsers">
+            <summary>
+            Get all users ̣(for admin).
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.ManageController.LockedOut(System.String)">
+            <summary>
+            Lock user by Id ̣(for admin).
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.ManageController.Delete(System.String)">
+            <summary>
+            Delete user by Id ̣(for admin).
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.ManageController.Unlock(System.String)">
+            <summary>
+            Unlock user by id ̣(for admin).
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.PatientController.GetPatientEncodedById(System.Int32)">
+            <summary>
+            Get patient by id.
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.PatientController.GetPatientsEncoded">
+             <summary>
+            Get all patients.
+             </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.PatientController.AddPatient(THOEP.Services.DTO.PatientDto)">
+            <summary>
+            Add patient by id.
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.PatientController.EditPatient(THOEP.Services.DTO.PatientDto)">
+            <summary>
+            Update patient by id.
+            </summary>
+        </member>
+        <member name="M:THOEP.WebAPI.Controllers.PatientController.DeletePatient(System.Int32)">
+            <summary>
+            Delete patient by id.
+            </summary>
+        </member>
+    </members>
+</doc>
