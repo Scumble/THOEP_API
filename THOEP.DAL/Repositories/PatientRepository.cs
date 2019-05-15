@@ -22,7 +22,8 @@ namespace THOEP.DAL.Repositories
 
         public List<Patient> GetPatients()
         {
-            return _context.Patients.ToList();
+            var userId = _caller.Claims.Single(c => c.Type == "id");
+            return _context.Patients.Where(g => g.UserId == userId.Value).ToList();
         }
 
         public Patient GetPatientById(int patientId)
@@ -34,6 +35,7 @@ namespace THOEP.DAL.Repositories
         public void AddPatient(Patient patient)
         {
             var userId = _caller.Claims.Single(c => c.Type == "id");
+            patient.Age = CalculateAge(patient.BirthDate);
             patient.UserId = userId.Value;
             if (patient.Id == 0)
             {
@@ -51,14 +53,26 @@ namespace THOEP.DAL.Repositories
                     dbEntry.Age = patient.Age;
                     dbEntry.Address = patient.Address;
                     dbEntry.BirthDate = patient.BirthDate;
-                    dbEntry.isActive = true;
                 }
             }
             _context.SaveChanges();
         }
 
+        private static int CalculateAge(DateTime dateOfBirth)
+        {
+            int age = 0;
+            age = DateTime.Now.Year - dateOfBirth.Year;
+            if (DateTime.Now.DayOfYear < dateOfBirth.DayOfYear)
+                age = age - 1;
+
+            return age;
+        }
+
         public void EditPatient(Patient patient)
         {
+            var userId = _caller.Claims.Single(c => c.Type == "id");
+            patient.UserId = userId.Value;
+            patient.Age = CalculateAge(patient.BirthDate);
             _context.Entry(patient).State =
                 Microsoft.EntityFrameworkCore.EntityState.Modified;
             _context.SaveChanges();

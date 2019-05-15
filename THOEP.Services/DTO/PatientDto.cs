@@ -13,14 +13,15 @@ namespace THOEP.Services.DTO
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Gender { get; set; }
-        public string Age { get; set; }
+        public int Age { get; set; }
         public string Address { get; set; }
         public DateTime BirthDate { get; set; }
-        public bool isActive { get; set; }
         public virtual ICollection<HealthInfoDto> HealthInfos { get; set; }
+        public virtual ICollection<PatientCoordiantesDto> PatientCoordiantesDtos { get; set; }
         public PatientDto()
         {
             HealthInfos = new List<HealthInfoDto>();
+            PatientCoordiantesDtos = new List<PatientCoordiantesDto>();
         }
     }
 }

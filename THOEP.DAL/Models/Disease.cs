@@ -10,7 +10,7 @@ namespace THOEP.DAL.Models
         public string DiseaseCode { get; set; }
         public string DiseaseName { get; set; }
         public float DangerLevel { get; set; }
-        public string Reccomendation { get; set; }
+        public string Recommendation { get; set; }
         public virtual ICollection<HealthInfo> HealthInfos { get; set; }
         public Disease()
         {

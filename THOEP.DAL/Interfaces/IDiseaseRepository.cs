@@ -7,7 +7,7 @@ namespace THOEP.DAL.Interfaces
 {
     public interface IDiseaseRepository
     {
-        List<Disease> GetDiseases(int healthInfoId);
+        List<Disease> GetDiseases();
         void AddDisease(Disease disease);
         void EditDisease(Disease disease);
         Disease DeleteDisease(int diseaseId);

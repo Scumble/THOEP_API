@@ -7,7 +7,7 @@ namespace THOEP.Services.Interfaces
 {
     public interface IDiseaseService
     {
-        List<DiseaseDto> GetDiseases(int healthInfoId);
+        List<DiseaseDto> GetDiseases();
         void AddDisease(DiseaseDto disease);
         void EditDisease(DiseaseDto disease);
         DiseaseDto DeleteDisease(int diseaseId);

@@ -17,44 +17,46 @@ namespace THOEP.WebAPI.Controllers
     public class PatientController : ControllerBase
     {
         private readonly IPatientService _patientService;
-        public PatientController(IPatientService patientService)
+        private readonly IPatientCoordinatesService _patientCoordinatesService;
+        public PatientController(IPatientService patientService, IPatientCoordinatesService patientCoordinatesService)
         {
             _patientService = patientService;
+            _patientCoordinatesService = patientCoordinatesService;
         }
 
-        //[HttpGet("patients")]
-        //public IActionResult GetPatients()
-        //{
-        //    return Ok(_patientService.GetPatients());
-        //}
+        [HttpGet("patients")]
+        public IActionResult GetPatients()
+        {
+            return Ok(_patientService.GetPatients());
+        }
 
-        //[HttpGet("patients/{patientId}")]
-        //public IActionResult GetPatientById(int patientId)
-        //{
-        //    return Ok(_patientService.GetPatientById(patientId));
-        //}
-
-        /// <summary>
-        /// Get patient by id.
-        /// </summary>
-        [Authorize(Policy = "ApiUser")]
         [HttpGet("patients/{patientId}")]
+        public IActionResult GetPatientById(int patientId)
+        {
+            return Ok(_patientService.GetPatientById(patientId));
+        }
+
+        [Authorize(Policy = "ApiUser")]
+        [HttpGet("patient-encoded/{patientId}")]
         public IActionResult GetPatientEncodedById(int patientId)
         {
             return Ok(_patientService.GetPatientByIdEncoded(patientId));
         }
-        /// <summary>
-        ///Get all patients.
-        /// </summary>
+
         [Authorize(Policy = "ApiUser")]
-        [HttpGet("patients")]
-        public IActionResult GetPatientsEncoded()
+        [HttpGet("patientcoord/{patientId}")]
+        public IActionResult GetPatientCoordinates(int patientId)
         {
-            return Ok(_patientService.GetPatientsEncoded());
+            return Ok(_patientCoordinatesService.GetPatientCoordinates(patientId));
         }
-        /// <summary>
-        /// Add patient by id.
-        /// </summary>
+
+        //[Authorize(Policy = "ApiUser")]
+        //[HttpGet("patients")]
+        //public IActionResult GetPatientsEncoded()
+        //{
+        //    return Ok(_patientService.GetPatientsEncoded());
+        //}
+
         [Authorize(Policy = "ApiUser")]
         [HttpPost("patients")]
         public IActionResult AddPatient([FromBody]PatientDto patientDto)

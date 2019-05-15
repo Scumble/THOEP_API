@@ -22,16 +22,17 @@ namespace THOEP.WebAPI.Controllers
         /// <summary>
         /// Get diseases by healthInfoId.
         /// </summary>
-        [Authorize(Policy = "ApiUser")]
-        [HttpGet("diseases/healthInfo/{healthInfoId}")]
-        public IActionResult GetDiseases(int healthInfoId)
+        [HttpGet("diseases")]
+        public IActionResult GetDiseases()
         {
-            return Ok(_diseaseService.GetDiseases(healthInfoId));
+            return Ok(_diseaseService.GetDiseases());
         }
 
         /// <summary>
         /// Get diseases by Id.
         /// </summary>
+
+        [Authorize(Policy = "Admin")]
         [HttpGet("diseases/{diseaseId}")]
         public IActionResult GetDiseasesById(int diseaseId)
         {
@@ -40,7 +41,7 @@ namespace THOEP.WebAPI.Controllers
         /// <summary>
         /// Add new disease.
         /// </summary>
-        [Authorize(Policy = "ApiUser")]
+        [Authorize(Policy = "Admin")]
         [HttpPost("diseases")]
         public IActionResult AddDisease([FromBody]DiseaseDto diseaseDto)
         {
@@ -54,7 +55,7 @@ namespace THOEP.WebAPI.Controllers
         /// <summary>
         /// Edit disease.
         /// </summary>
-        [Authorize(Policy = "ApiUser")]
+        [Authorize(Policy = "Admin")]
         [HttpPut("diseases")]
         public IActionResult EditDisease([FromBody]DiseaseDto diseaseDto)
         {
@@ -68,7 +69,7 @@ namespace THOEP.WebAPI.Controllers
         /// <summary>
         /// Delete disease by Id.
         /// </summary>
-        [Authorize(Policy = "ApiUser")]
+        [Authorize(Policy = "Admin")]
         [HttpDelete("diseases/{diseaseId}")]
         public IActionResult DeleteDisease(int diseaseId)
         {

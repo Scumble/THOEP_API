@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
+using THOEP.DAL.Models;
 
-namespace THOEP.Services.DTO
+namespace THOEP.DAL.ViewModel
 {
-    public class HealthInfoDto
+    public class HealthInfoViewModel
     {
         public int Id { get; set; }
         public int PatientId { get; set; }
-        public virtual PatientDto Patient { get; set; }
-        public string DiseaseId { get; set; }
-        public virtual DiseaseDto Disease { get; set; }
+        public string DiseaseCode { get; set; }
         public float HeartRate { get; set; }
         public float BloodPressure { get; set; }
         public float Temperature { get; set; }
         public float Weight { get; set; }
+        [DataType(DataType.Date)]
         public DateTime Time { get; set; }
     }
 }

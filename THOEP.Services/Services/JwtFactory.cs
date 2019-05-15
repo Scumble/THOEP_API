@@ -80,7 +80,7 @@ namespace THOEP.Services.Services
         }
         public ClaimsIdentity GenerateClaimsIdentityAdmin(string userName, string id)
         {
-            userName = "admin@gmail.com";
+            //userName = "admin@gmail.com";
             return new ClaimsIdentity(new GenericIdentity(userName, "Admin"), new[]
             {
                 new Claim(Helpers.Constants.Strings.JwtClaimIdentifiers.Password, id),

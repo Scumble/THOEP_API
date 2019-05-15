@@ -17,5 +17,6 @@ namespace THOEP.DAL.DbContext
         public DbSet<Patient> Patients { get; set; }
         public DbSet<HealthInfo> HealthInfos { get; set; }
         public DbSet<Disease> Diseases { get; set; }
+        public DbSet<PatientCoordinates> PatientCoordinates { get; set; }
     }
 }

@@ -50,7 +50,7 @@ namespace THOEP.WebAPI.Controllers
         [HttpGet("users")]
         public async Task<IActionResult> GetAllUsers()
         {
-            var user = await _userManager.Users.ToListAsync();
+            var user = await _userManager.Users.Where(x=> !x.Email.Contains("admin")).ToListAsync();
             if (user == null)
             {
                 return BadRequest();
@@ -110,7 +110,6 @@ namespace THOEP.WebAPI.Controllers
             return new OkObjectResult("Account unlocked");
         }
 
-        [Authorize(Policy = "Admin")]
         [HttpPost("backup")]
         public IActionResult BackUpDB()
         {
@@ -118,7 +117,6 @@ namespace THOEP.WebAPI.Controllers
             return Ok();
         }
 
-        [Authorize(Policy = "Admin")]
         [HttpPost("restore")]
         public IActionResult RestoreDB()
         {

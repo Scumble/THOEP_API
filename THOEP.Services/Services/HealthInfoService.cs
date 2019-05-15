@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using THOEP.DAL.Interfaces;
 using THOEP.DAL.Models;
+using THOEP.DAL.ViewModel;
 using THOEP.Services.DTO;
 using THOEP.Services.Interfaces;
 
@@ -22,21 +23,21 @@ namespace THOEP.Services.Services
             _mapper = mapper;
         }
 
-        public List<HealthInfoDto> GetHealthInfo(int patientId)
+        public List<HealthInfoViewModelDto> GetHealthInfo(int patientId)
         {
-            return _mapper.Map<IEnumerable<HealthInfo>, List<HealthInfoDto>>(_healthInfoRepository.GetHealthInfo(patientId));
+            return _mapper.Map<IEnumerable<HealthInfoViewModel>, List<HealthInfoViewModelDto>>(_healthInfoRepository.GetHealthInfo(patientId));
         }
 
         public List<string> GetHealthInfoEncoded(int patientId)
         {
-            var healthInfos = _mapper.Map<IEnumerable<HealthInfo>, List<HealthInfoDto>>(_healthInfoRepository.GetHealthInfo(patientId));
+            var healthInfos = _mapper.Map<IEnumerable<HealthInfoViewModel>, List<HealthInfoViewModelDto>>(_healthInfoRepository.GetHealthInfo(patientId));
             List<string> result = new List<string>();
             for (var i = 0; i < healthInfos.Count; i++)
             {
                 Segment OBX = new Segment("OBX", new HL7Encoding());
                 OBX.AddNewField(healthInfos[i].Id.ToString(), 1);
                 OBX.AddNewField(healthInfos[i].PatientId.ToString(), 2);
-                OBX.AddNewField(healthInfos[i].DiseaseId.ToString(), 3);
+                OBX.AddNewField(healthInfos[i].DiseaseCode, 3);
                 OBX.AddNewField(healthInfos[i].HeartRate.ToString(), 4);
                 OBX.AddNewField("bpm^Heart Rate",5);
                 OBX.AddNewField(healthInfos[i].BloodPressure.ToString(), 6);
@@ -45,7 +46,6 @@ namespace THOEP.Services.Services
                 OBX.AddNewField("^Temperature", 9);
                 OBX.AddNewField(healthInfos[i].Weight.ToString(), 10);
                 OBX.AddNewField("kg^Kilogram", 11);
-                OBX.AddNewField(healthInfos[i].ActivityPoints.ToString(), 12);
                 Message message = new Message();
                 message.AddNewSegment(OBX);
                 result.Add(message.SerializeMessage(false));
@@ -74,18 +74,18 @@ namespace THOEP.Services.Services
         }
 
 
-        public HealthInfoDto GetHealthInfoById(int healthInfoId)
+        public HealthInfoViewModelDto GetHealthInfoById(int healthInfoId)
         {
-            return _mapper.Map<HealthInfo, HealthInfoDto>(_healthInfoRepository.GetHealthInfoById(healthInfoId));
+            return _mapper.Map<HealthInfoViewModel, HealthInfoViewModelDto>(_healthInfoRepository.GetHealthInfoById(healthInfoId));
         }
 
         public string GetHealthInfoByIdEncoded(int healthInfoId)
         {
-            var healthInfo = _mapper.Map<HealthInfo, HealthInfoDto>(_healthInfoRepository.GetHealthInfoById(healthInfoId));
+            var healthInfo = _mapper.Map<HealthInfoViewModel, HealthInfoViewModelDto>(_healthInfoRepository.GetHealthInfoById(healthInfoId));
             Segment OBX = new Segment("OBX", new HL7Encoding());
             OBX.AddNewField(healthInfo.Id.ToString(), 1);
             OBX.AddNewField(healthInfo.PatientId.ToString(), 2);
-            OBX.AddNewField(healthInfo.DiseaseId.ToString(), 3);
+            OBX.AddNewField(healthInfo.DiseaseCode, 3);
             OBX.AddNewField(healthInfo.HeartRate.ToString(), 4);
             OBX.AddNewField("bpm^Heart Rate", 5);
             OBX.AddNewField(healthInfo.BloodPressure.ToString(), 6);
@@ -94,7 +94,6 @@ namespace THOEP.Services.Services
             OBX.AddNewField("^Temperature", 9);
             OBX.AddNewField(healthInfo.Weight.ToString(), 10);
             OBX.AddNewField("kg^Kilogram", 11);
-            OBX.AddNewField(healthInfo.ActivityPoints.ToString(), 12);
             Message message = new Message();
             message.AddSegmentMSH("THOEP", "StJohn", "CATH", "THOEP", Guid.NewGuid().ToString(), "ADT^001", "MSGID", "P", "2.5");
             message.AddNewSegment(OBX);
@@ -102,14 +101,14 @@ namespace THOEP.Services.Services
             return result;
         }
 
-        public void AddHealthInfo(HealthInfoDto healthInfo)
+        public void AddHealthInfo(HealthInfoViewModelDto healthInfo)
         {
-            _healthInfoRepository.AddHealthInfo(_mapper.Map<HealthInfoDto, HealthInfo>(healthInfo));
+            _healthInfoRepository.AddHealthInfo(_mapper.Map<HealthInfoViewModelDto, HealthInfoViewModel>(healthInfo));
         }
 
-        public void EditHealthInfo(HealthInfoDto healthInfo)
+        public void EditHealthInfo(HealthInfoViewModelDto healthInfo)
         {
-            _healthInfoRepository.EditHealthInfo(_mapper.Map<HealthInfoDto, HealthInfo>(healthInfo));
+            _healthInfoRepository.EditHealthInfo(_mapper.Map<HealthInfoViewModelDto, HealthInfoViewModel>(healthInfo));
         }
 
         public HealthInfoDto DeleteHealthInfo(int healthInfoId)
@@ -117,34 +116,37 @@ namespace THOEP.Services.Services
             return _mapper.Map<HealthInfo, HealthInfoDto>(_healthInfoRepository.DeleteHealthInfo(healthInfoId));
         }
 
-        public List<string> CheckHealthInfo(int patientId)
+        public List<string> CheckHealthInfo(int patientId, int healthInfoId)
         {
             var status = new List<string>();
-            var healthInfos = _mapper.Map<IEnumerable<HealthInfo>, List<HealthInfoDto>>(_healthInfoRepository.GetHealthInfo(patientId));
+            var healthInfos = _mapper.Map<HealthInfoViewModel, HealthInfoViewModelDto>(_healthInfoRepository.GetHealthInfoById(healthInfoId));
             var patient = _mapper.Map<Patient, PatientDto>(_patientRepository.GetPatientById(patientId));
-            for (var i=0;i< healthInfos.Count; i++)
-            {
-                if(healthInfos[i].HeartRate>100)
+ 
+                if(healthInfos.HeartRate>100)
                 {
                     status.Add("Ur patient have a quite high heart rate.Please calm down");
                 }
-                if(healthInfos[i].HeartRate>130)
+                if(healthInfos.HeartRate>130)
                 {
                     status.Add("Ur patient  have an abnormal high heart rate.Please contact the doctor");
                 }
-                if(healthInfos[i].BloodPressure > 142 && patient.Gender=="Male")
+                if(healthInfos.BloodPressure > 142 && patient.Gender=="Male")
                 {
                     status.Add("Ur patient  have a quite high blood pressure (male).");
                 }
-                if (healthInfos[i].BloodPressure > 159 && patient.Gender == "Female")
+                if (healthInfos.BloodPressure > 159 && patient.Gender == "Female")
                 {
                     status.Add("Ur patient have a quite high blood pressure (female).");
                 }
-                if(healthInfos[i].Temperature > 37)
+                if(healthInfos.Temperature > 37)
                 {
                     status.Add("Ur patient have a quite high temperature.");
                 }
+                else
+            {
+                status.Add("Your patient in a perfect state");
             }
+            
             return status;
         }
     }

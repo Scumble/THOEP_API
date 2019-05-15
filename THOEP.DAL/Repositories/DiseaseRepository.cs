@@ -15,9 +15,9 @@ namespace THOEP.DAL.Repositories
         {
             _context = context;
         }
-        public List<Disease> GetDiseases(int healthInfoId)
+        public List<Disease> GetDiseases()
         {
-            return _context.Diseases.Where(x => x.Id == healthInfoId).ToList();
+            return _context.Diseases.ToList();
         }
         public Disease GetDiseaseById(int diseaseId)
         {
@@ -39,7 +39,7 @@ namespace THOEP.DAL.Repositories
                     dbEntry.DiseaseCode = disease.DiseaseCode;
                     dbEntry.DiseaseName = disease.DiseaseName;
                     dbEntry.DangerLevel = disease.DangerLevel;
-                    dbEntry.Reccomendation = disease.Reccomendation;
+                    dbEntry.Recommendation = disease.Recommendation;
                 }
             }
             _context.SaveChanges();

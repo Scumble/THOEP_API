@@ -19,9 +19,9 @@ namespace THOEP.Services.Services
             _mapper = mapper;
         }
 
-        public List<DiseaseDto> GetDiseases(int healthInfoId)
+        public List<DiseaseDto> GetDiseases()
         {
-            return _mapper.Map<IEnumerable<Disease>, List<DiseaseDto>>(_diseaseRepository.GetDiseases(healthInfoId));
+            return _mapper.Map<IEnumerable<Disease>, List<DiseaseDto>>(_diseaseRepository.GetDiseases());
         }
 
         public DiseaseDto GetDiseaseById(int diseaseId)

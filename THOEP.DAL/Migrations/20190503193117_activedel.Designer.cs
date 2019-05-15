@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using THOEP.DAL.DbContext;
 
 namespace THOEP.DAL.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20190503193117_activedel")]
+    partial class activedel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -196,7 +198,7 @@ namespace THOEP.DAL.Migrations
 
                     b.Property<string>("DiseaseName");
 
-                    b.Property<string>("Recommendation");
+                    b.Property<string>("Reccomendation");
 
                     b.HasKey("Id");
 
@@ -208,6 +210,8 @@ namespace THOEP.DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<float>("ActivityPoints");
 
                     b.Property<float>("BloodPressure");
 
@@ -222,6 +226,8 @@ namespace THOEP.DAL.Migrations
                     b.Property<DateTime>("Time");
 
                     b.Property<float>("Weight");
+
+                    b.Property<bool>("isFall");
 
                     b.HasKey("Id");
 
@@ -240,7 +246,7 @@ namespace THOEP.DAL.Migrations
 
                     b.Property<string>("Address");
 
-                    b.Property<int>("Age");
+                    b.Property<string>("Age");
 
                     b.Property<DateTime>("BirthDate");
 
@@ -255,25 +261,6 @@ namespace THOEP.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Patients");
-                });
-
-            modelBuilder.Entity("THOEP.DAL.Models.PatientCoordinates", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<float>("Latitude");
-
-                    b.Property<float>("Longtitude");
-
-                    b.Property<int>("PatientId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PatientId");
-
-                    b.ToTable("PatientCoordinates");
                 });
 
             modelBuilder.Entity("THOEP.DAL.Models.User", b =>
@@ -349,14 +336,6 @@ namespace THOEP.DAL.Migrations
 
                     b.HasOne("THOEP.DAL.Models.Patient", "Patient")
                         .WithMany("HealthInfos")
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("THOEP.DAL.Models.PatientCoordinates", b =>
-                {
-                    b.HasOne("THOEP.DAL.Models.Patient", "Patient")
-                        .WithMany("PatientCoordinates")
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

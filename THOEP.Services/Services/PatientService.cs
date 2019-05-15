@@ -35,7 +35,7 @@ namespace THOEP.Services.Services
                 PID.AddNewField(patients[i].Id.ToString(), 1);
                 PID.AddNewField(patients[i].FirstName + "^" + patients[i].LastName, 2);
                 PID.AddNewField(patients[i].Gender, 3);
-                PID.AddNewField(patients[i].Age, 4);
+                PID.AddNewField(patients[i].Age.ToString(), 4);
                 PID.AddNewField(patients[i].Address, 5);
                 PID.AddNewField(patients[i].BirthDate.Date.ToString(), 6);
                 Message message = new Message();
@@ -58,7 +58,7 @@ namespace THOEP.Services.Services
             PID.AddNewField(patient.Id.ToString(), 1);
             PID.AddNewField(patient.FirstName + "^" + patient.LastName, 2);
             PID.AddNewField(patient.Gender, 3);
-            PID.AddNewField(patient.Age, 4);
+            PID.AddNewField(patient.Age.ToString(), 4);
             PID.AddNewField(patient.Address, 5);
             PID.AddNewField(patient.BirthDate.Date.ToString(), 6);
             Message message = new Message();

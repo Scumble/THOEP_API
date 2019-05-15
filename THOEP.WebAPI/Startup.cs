@@ -57,6 +57,8 @@ namespace THOEP.WebAPI
             services.AddTransient<IDiseaseRepository, DiseaseRepository>();
             services.AddTransient<IDiseaseService, DiseaseService>();
             services.AddTransient<IPatientService, PatientService>();
+            services.AddTransient<IPatientCoordinatesRepository, PatientCoordinatesRepository>();
+            services.AddTransient<IPatientCoordinatesService, PatientCoordinatesService>();
             services.AddSingleton<IJwtFactory, JwtFactory>();
 
             var jwtAppSettingOptions = Configuration.GetSection(nameof(JwtIssuerOptions));

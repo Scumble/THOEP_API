@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using THOEP.DAL.Models;
+using THOEP.DAL.ViewModel;
 using THOEP.Services.DTO;
 
 namespace THOEP.Services.MapperConfig
@@ -15,6 +16,8 @@ namespace THOEP.Services.MapperConfig
             CreateMap<Disease, DiseaseDto>();
             CreateMap<HealthInfo, HealthInfoDto>();
             CreateMap<AppUser, AppUserDto>();
+            CreateMap<HealthInfoViewModel, HealthInfoViewModelDto>();
+            CreateMap<PatientCoordinates, PatientCoordiantesDto>();
         }
     }
 }

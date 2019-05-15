@@ -7,18 +7,18 @@ namespace THOEP.Services.Interfaces
 {
     public interface IHealthInfoService
     {
-        List<HealthInfoDto> GetHealthInfo(int patientId);
+        List<HealthInfoViewModelDto> GetHealthInfo(int patientId);
         List<string> GetHealthInfoEncoded(int patientId);
-        void AddHealthInfo(HealthInfoDto healthInfoDtp);
-        void EditHealthInfo(HealthInfoDto healthInfoDto);
+        void AddHealthInfo(HealthInfoViewModelDto healthInfoDtp);
+        void EditHealthInfo(HealthInfoViewModelDto healthInfoDto);
         HealthInfoDto DeleteHealthInfo(int healthInfoId);
-        HealthInfoDto GetHealthInfoById(int healthInfoId);
+        HealthInfoViewModelDto GetHealthInfoById(int healthInfoId);
         string GetHealthInfoByIdEncoded(int healthInfoId);
         float GetAverageHeartRate(int patientId);
         float GetAverageBloodPressure(int patientId);
         float GetAverageTemperature(int patientId);
         float GetAverageWeight(int patientId);
-        List<string> CheckHealthInfo(int patientId);
+        List<string> CheckHealthInfo(int patientId, int healthInfoId);
 
     }
 }

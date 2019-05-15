@@ -97,7 +97,7 @@ namespace THOEP.WebAPI.Controllers
         }
         private async Task<ClaimsIdentity> GetClaimsIdentityAdmin(string userName, string password)
         {
-            userName = "admin@gmail.com";
+           // userName = "admin@gmail.com";
             if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
                 return await Task.FromResult<ClaimsIdentity>(null);
 

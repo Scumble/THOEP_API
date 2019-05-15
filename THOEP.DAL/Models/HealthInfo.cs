@@ -16,9 +16,7 @@ namespace THOEP.DAL.Models
         public float BloodPressure { get; set; }
         public float Temperature { get; set; }
         public float Weight { get; set; }
-        public float ActivityPoints { get; set; }
         [DataType(DataType.Date)]
         public DateTime Time { get; set; }
-        public bool isFall { get; set; }
     }
 }
