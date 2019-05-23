@@ -17,11 +17,11 @@ namespace THOEP.Services.DTO
         public string Address { get; set; }
         public DateTime BirthDate { get; set; }
         public virtual ICollection<HealthInfoDto> HealthInfos { get; set; }
-        public virtual ICollection<PatientCoordiantesDto> PatientCoordiantesDtos { get; set; }
+        public virtual ICollection<PatientCoordiantesDto> PatientCoordinates { get; set; }
         public PatientDto()
         {
             HealthInfos = new List<HealthInfoDto>();
-            PatientCoordiantesDtos = new List<PatientCoordiantesDto>();
+            PatientCoordinates = new List<PatientCoordiantesDto>();
         }
     }
 }
