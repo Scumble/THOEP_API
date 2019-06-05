@@ -24,5 +24,11 @@ namespace THOEP.Services.Services
         {
             return _mapper.Map<PatientCoordinates, PatientCoordiantesDto>(_patientCoordinatesRepository.GetPatientCoordinates(patientId));
         }
+
+        public void AddPatientCoordinates(PatientCoordiantesDto coordiantesDto)
+        {
+            _patientCoordinatesRepository.AddPatientCoordinates(_mapper.Map<PatientCoordiantesDto, PatientCoordinates>(coordiantesDto));
+        } 
+
     }
 }

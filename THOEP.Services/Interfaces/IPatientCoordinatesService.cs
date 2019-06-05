@@ -8,5 +8,6 @@ namespace THOEP.Services.Interfaces
     public interface IPatientCoordinatesService
     {
         PatientCoordiantesDto GetPatientCoordinates(int patientId);
+        void AddPatientCoordinates(PatientCoordiantesDto coordiantesDto);
     }
 }

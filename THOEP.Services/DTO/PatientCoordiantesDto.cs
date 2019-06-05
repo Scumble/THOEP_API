@@ -12,5 +12,13 @@ namespace THOEP.Services.DTO
         public virtual PatientDto Patient { get; set; }
         public float Longtitude { get; set; }
         public float Latitude { get; set; }
+
+        public PatientCoordiantesDto(int patientId,float longtitude, float latitude)
+        {
+            PatientId = patientId;
+            Longtitude = longtitude;
+            Latitude = latitude;
+        }
+        public PatientCoordiantesDto() { }
     }
 }

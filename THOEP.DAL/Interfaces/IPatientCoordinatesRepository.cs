@@ -8,5 +8,6 @@ namespace THOEP.DAL.Interfaces
     public interface IPatientCoordinatesRepository
     {
         PatientCoordinates GetPatientCoordinates(int patientId);
+        void AddPatientCoordinates(PatientCoordinates coordinates);
     }
 }
